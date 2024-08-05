@@ -1,0 +1,48 @@
+h1
+{
+    display: flex;
+    justify-content: center;
+}
+
+.Liststyle
+{
+    width: 500px;
+    background-color: rgba(198, 211, 236, 0.65);
+    backdrop-filter: blur(10px) saturate(180%);
+    border: 2px solid black;
+    border-radius: 20px;
+}
+
+.Liststyle h1
+{
+    font-size: 3rem;
+    margin-bottom: 30px;
+    text-decoration: underline;
+}
+
+.Nice ul
+{
+    padding: 40px 20px;
+}
+
+.Nice ul span
+{
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.textdiv
+{
+    width: 100%;
+    margin-top: 30px;
+    border-bottom: none;
+}
+.textdiv div
+{
+    width: 95%;
+    margin: auto auto;
+    margin-left: 10px;
+    border-radius: 10px;
+    text-decoration: none;
+    border-bottom: none;
+}
