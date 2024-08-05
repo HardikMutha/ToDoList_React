@@ -1,20 +1,29 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ListPart from "./Listpart.jsx";
 import "./StyleList.css";
-import TodoForm from "./TodoForm.jsx";
+import { v4 as uuidv4 } from 'uuid';
 
 export default function TodoList() {
-  const [tasks, updateTasks] = useState([
-    { id: 1, text: "Buy Vegetables", completed: false },
-    { id: 2, text: "walk the dog", completed: true },
-    { id: 3, text: "Clean The Room", completed: false },
-  ]);
+
+    const getInitialdata = ()=>{
+        const data = JSON.parse(localStorage.getItem("tasks"));
+        if(!data)
+            return [];
+        return data;
+    }
+
+  const [tasks, updateTasks] = useState(getInitialdata);
+
+  useEffect(()=>{
+    localStorage.setItem("tasks",JSON.stringify(tasks));
+  },[tasks]);
+
   function removeTodo(id) {
     const updatedTasks = tasks.filter((t) => t.id !== id);
     updateTasks([...updatedTasks]);
   }
   function updateTask(taskname) {
-    const newtask = { id: 10, text: taskname, completed: false };
+    const newtask = { id: uuidv4(), text: taskname, completed: false };
     const updatedTasks = [...tasks, newtask];
     updateTasks(updatedTasks);
   }

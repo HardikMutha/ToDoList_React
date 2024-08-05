@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -13,11 +13,20 @@ import TodoForm from "./TodoForm";
 
 export default function CheckboxList({ listitems, removeElement, updateTask }) {
   const [checked, setChecked] = useState({ ...listitems });
-  function handleToggle() {
-    console.log(checked);
-    if (checked.completed) setChecked({ ...checked, completed: false });
-    else setChecked({ ...checked, completed: true });
+  function handleToggle() 
+  {
+    if (checked.completed)
+      setChecked((oldCheck)=>{
+        return { ...oldCheck, completed: false }
+      });
+    else 
+    setChecked((oldCheck)=>{
+      return { ...oldCheck, completed: true }
+    });
   }
+  useEffect(()=>{
+    localStorage.setItem("checked",JSON.stringify(checked));
+  },[checked]);
 
   return (
     <div className="Nice">
@@ -29,11 +38,11 @@ export default function CheckboxList({ listitems, removeElement, updateTask }) {
             <ListItem
               key={value.id}
               secondaryAction={
-                <IconButton edge="end" aria-label="comments">
+                <IconButton edge="end" aria-label="comments" onClick={() => {
+                  removeElement(value.id);
+                }}>
                   <DeleteIcon
-                    onClick={() => {
-                      removeElement(value.id);
-                    }}
+                    
                   />
                 </IconButton>
               }

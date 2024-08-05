@@ -1,11 +1,16 @@
 import TextField from "@mui/material/TextField";
 import { ListItem } from "@mui/material";
 import "./BtnStyle.css";
+import { useState } from "react";
 
 export default function TodoForm({ updateTask }) {
   function passTask(evt) {
     evt.preventDefault();
-    updateTask(evt.target[0].value);
+    if(evt.target[0].value!='')
+    {
+        updateTask(evt.target[0].value);
+    }
+    evt.target[0].value = '';
   }
   return (
     <ListItem>
@@ -23,6 +28,7 @@ export default function TodoForm({ updateTask }) {
             },
           }}
         />
+        {/* {isValid && <p style={{color:'red'}}>Please Enter a Task !!!</p>}   */}
         <div className="nice">
           <button className="submitbtm">Add Task</button>
         </div>
